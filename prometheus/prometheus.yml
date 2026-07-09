@@ -1,0 +1,18 @@
+# Prometheus scrape config
+# Place at C:\monitoring\prometheus.yml (Windows/Docker) and mount into the container:
+#   -v C:\monitoring\prometheus.yml:/etc/prometheus/prometheus.yml
+# Adjust the target IP if your router LAN address differs.
+
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  # System metrics: CPU, memory, network interfaces, thermal, conntrack
+  - job_name: 'openwrt'
+    static_configs:
+      - targets: ['192.168.1.1:9100']
+
+  # dnsmasq metrics: DNS queries forwarded vs locally answered (= blocked)
+  - job_name: 'openwrt-dnsmasq'
+    static_configs:
+      - targets: ['192.168.1.1:9101']

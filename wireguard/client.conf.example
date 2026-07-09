@@ -1,0 +1,17 @@
+# WireGuard client config template — import into the WireGuard app.
+# Replace all <PLACEHOLDERS>. Never commit real keys.
+
+[Interface]
+PrivateKey = <CLIENT_PRIVATE_KEY>
+Address = 10.9.0.2/24
+# Route client DNS through the Pi -> adblock-fast filters VPN traffic too
+DNS = 10.9.0.1
+
+[Peer]
+PublicKey = <SERVER_PUBLIC_KEY>
+# DuckDNS hostname survives ISP public-IP rotation
+Endpoint = <YOUR_SUBDOMAIN>.duckdns.org:51820
+# 0.0.0.0/0 = tunnel ALL traffic. Use 192.168.1.0/24,10.9.0.0/24 for split tunnel.
+AllowedIPs = 0.0.0.0/0
+# Keeps NAT mappings alive on mobile networks
+PersistentKeepalive = 25

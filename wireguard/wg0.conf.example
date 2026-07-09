@@ -1,0 +1,22 @@
+# WireGuard server reference — OpenWrt uses UCI, not this file directly.
+# This documents the equivalent configuration for portability/reference.
+# On OpenWrt, apply via the UCI commands in SETUP.md §6.
+#
+# NEVER commit real keys. Generate your own:
+#   wg genkey | tee server_private.key | wg pubkey > server_public.key
+
+[Interface]
+PrivateKey = <SERVER_PRIVATE_KEY>
+Address = 10.9.0.1/24
+ListenPort = 51820
+
+# One [Peer] block per client device
+[Peer]
+# client1
+PublicKey = <CLIENT1_PUBLIC_KEY>
+AllowedIPs = 10.9.0.2/32
+
+# [Peer]
+# # client2 (e.g. laptop)
+# PublicKey = <CLIENT2_PUBLIC_KEY>
+# AllowedIPs = 10.9.0.3/32
